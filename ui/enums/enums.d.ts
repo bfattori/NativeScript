@@ -352,9 +352,18 @@
     }
 
     /**
+     * Specifies the visibility of the application bar icon
+     */
+    export module AndroidActionBarIconVisibility {
+        export var auto: string;
+        export var never: string;
+        export var always: string;
+    }
+
+    /**
      * Specifies android MenuItem position.
      */
-    module MenuItemPosition {
+    module AndroidActionItemPosition {
         /**
          * Always show this item as a button in an Action Bar.
          */
@@ -369,5 +378,20 @@
          * Never show this item as a button in an Action Bar.
          */
         export var popup: string;
+    }
+
+    /**
+     * Specifies android MenuItem position.
+     */
+    module IOSActionItemPosition {
+        /**
+         * Show this item at the left of the navigation bar.
+         */
+        export var left: string;
+
+        /**
+         * Show this item at the right of the action bar.
+         */
+        export var right: string;
     }
 }

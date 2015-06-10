@@ -6,8 +6,7 @@ declare module "ui/page" {
     import view = require("ui/core/view");
     import contentView = require("ui/content-view");
     import frame = require("ui/frame");
-    import dependencyObservable = require("ui/core/dependency-observable");
-    import bindable = require("ui/core/bindable");
+    import actionBar = require("ui/action-bar");
 
     //@private
     import styleScope = require("ui/styling/style-scope");
@@ -18,7 +17,7 @@ declare module "ui/page" {
      */
     export interface NavigatedData extends observable.EventData {
         /**
-         * The navigation context (optional, may be undefined) passed to the page navigation evetns method.
+         * The navigation context (optional, may be undefined) passed to the page navigation events method.
          */
         context: any;
     }
@@ -39,13 +38,13 @@ declare module "ui/page" {
     }
 
     export module knownCollections {
-        export var optionsMenu: string;
+        export var actionItems: string;
     }
 
     /**
      * Represents a logical unit for navigation (inside Frame).
      */
-    export class Page extends contentView.ContentView implements view.AddArrayFromBuilder {
+    export class Page extends contentView.ContentView {
         /**
          * String value used when hooking to shownModally event.
          */
@@ -101,9 +100,9 @@ declare module "ui/page" {
         frame: frame.Frame;
 
         /**
-         * Gets the OptionsMenu for this page.
+         * Gets the ActionBar for this page.
          */
-        optionsMenu: OptionsMenu;
+        actionBar: actionBar.ActionBar;
 
         /**
          * A basic method signature to hook an event listener (shortcut alias to the addEventListener method).
@@ -147,8 +146,6 @@ declare module "ui/page" {
          */
         showModal(moduleName: string, context: any, closeCallback: Function, fullscreen?: boolean);
 
-        _addArrayFromBuilder(name: string, value: Array<any>): void;
-
         //@private
 
         /**
@@ -174,7 +171,6 @@ declare module "ui/page" {
         onNavigatedFrom(isBackNavigation: boolean): void;
 
         _getStyleScope(): styleScope.StyleScope;
-        _invalidateOptionsMenu();
         //@endprivate
     }
 
@@ -196,60 +192,5 @@ declare module "ui/page" {
          * Gets or sets the page module exports.
          */
         exports?: any;
-    }
-
-    export class OptionsMenu {
-        addItem(item: MenuItem): void;
-        removeItem(item: MenuItem): void;
-        getItems(): Array<MenuItem>;
-        getItemAt(index: number): MenuItem;
-    }
-
-    export class MenuItem extends bindable.Bindable {
-        /**
-         * String value used when hooking to tap event.
-         */
-        public static tapEvent: string;
-
-        /**
-         * Represents the observable property backing the text property.
-         */
-        public static textProperty: dependencyObservable.Property;
-
-        /**
-         * Represents the observable property backing the icon property.
-         */
-        public static iconProperty: dependencyObservable.Property;
-
-        text: string;
-        icon: string;
-        android: AndroidMenuItemOptions;
-
-        /**
-         * A basic method signature to hook an event listener (shortcut alias to the addEventListener method).
-         * @param eventNames - String corresponding to events (e.g. "propertyChange"). Optionally could be used more events separated by `,` (e.g. "propertyChange", "change"). 
-         * @param callback - Callback function which will be executed when event is raised.
-         * @param thisArg - An optional parameter which will be used as `this` context for callback execution.
-         */
-        on(eventNames: string, callback: (data: observable.EventData) => void);
-
-        /**
-         * Raised when a tap event occurs.
-         */
-        on(event: "tap", callback: (args: observable.EventData) => void);
-
-        //@private
-        _raiseTap(): void;
-        //@endprivate
-    }
-
-    interface AndroidMenuItemOptions {
-
-        /**
-         * Specify if android menuItem should appear in the actionBar or in the popup.
-         * Use values from enums MenuItemPosition.
-         * Changes after menuItem is created are not supported.
-         */
-        position: string;
     }
 }
