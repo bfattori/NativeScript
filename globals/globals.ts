@@ -16,3 +16,8 @@ if (types.isUndefined(global.NSObject)) {
 
 global.XMLHttpRequest = (<any>http).XMLHttpRequest;
 global.alert = dialogs.alert;
+
+export function log3(msg) {
+      console.log(msg)
+}
+

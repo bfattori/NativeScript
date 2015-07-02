@@ -1,4 +1,7 @@
 ﻿/* tslint:disable:no-unused-variable */
+
+declare function log3(msg): void;
+
 interface Console {
     time(reportName: string): void;
     timeEnd(reportName: string): void;
