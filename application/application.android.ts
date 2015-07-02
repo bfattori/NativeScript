@@ -129,14 +129,28 @@ class AndroidApplication implements dts.AndroidApplication {
     public hasActionBar: boolean;
     // public getActivity: (intent: android.content.Intent) => any;
 
+    @Deprecated
     public onActivityCreated: (activity: android.app.Activity, bundle: android.os.Bundle) => void;
+
+    @Deprecated
     public onActivityDestroyed: (activity: android.app.Activity) => void;
+
+    @Deprecated
     public onActivityStarted: (activity: android.app.Activity) => void;
+
+    @Deprecated
     public onActivityPaused: (activity: android.app.Activity) => void;
+
+    @Deprecated
     public onActivityResumed: (activity: android.app.Activity) => void;
+
+    @Deprecated
     public onActivityStopped: (activity: android.app.Activity) => void;
+
+    @Deprecated
     public onSaveActivityState: (activity: android.app.Activity, bundle: android.os.Bundle) => void;
 
+    @Deprecated
     public onActivityResult: (requestCode: number, resultCode: number, data: android.content.Intent) => void;
 
     private _eventsToken: any;
