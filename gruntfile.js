@@ -307,6 +307,7 @@ module.exports = function(grunt) {
                     target: "es5",
                     sourceMap: false,
                     declaration: false,
+                    emitDecoratorMetadata: true,
                     removeComments: "<%= !grunt.option('leavecomments') || '' %>",
                     compiler: "node_modules/typescript/bin/tsc",
                     noEmitOnError: true
